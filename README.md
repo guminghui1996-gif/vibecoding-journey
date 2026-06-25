@@ -17,6 +17,10 @@ Vibecoding 本身并没有意义，真正有价值的是，在做项目的过程
 - Vercel 部署。
 - 不做登录、评论、数据库、后台和自动同步。
 
+## 公开地址
+
+https://vibecoding-journey.vercel.app
+
 ## 隐私边界
 
 公开内容不得包含：
