@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  const modules = import.meta.glob("../../content/days/*.md", { eager: true });
+  return Object.entries(modules).map(([path, module]) => {
+    const slug = path.split("/").pop()?.replace(".md", "") ?? "";
+    return { params: { slug }, props: { entry: module } };
+  });
+}
+
+const { entry } = Astro.props as {
+  entry: {
+    frontmatter: { title: string };
+    default: unknown;
+  };
+};
+const Content = entry.default;
+---
+
+<BaseLayout title={entry.frontmatter.title}>
+  <article>
+    <Content />
+  </article>
+</BaseLayout>

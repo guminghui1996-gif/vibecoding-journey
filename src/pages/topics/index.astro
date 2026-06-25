@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const modules = import.meta.glob("../../content/topics/*.md", { eager: true });
+const topics = Object.entries(modules)
+  .map(([path, module]) => {
+    const entry = module as { frontmatter: { title: string; summary: string } };
+    const slug = path.split("/").pop()?.replace(".md", "") ?? "";
+    return { slug, ...entry.frontmatter };
+  })
+  .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+---
+
+<BaseLayout title="主题索引">
+  <h1>主题索引</h1>
+  <p>这里把每天学到的方法按主题沉淀，方便以后复用。</p>
+
+  <div class="list">
+    {topics.map((topic) => (
+      <a class="card" href={`/topics/${topic.slug}/`}>
+        <strong>{topic.title}</strong>
+        <span>{topic.summary}</span>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .list {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .card {
+    display: grid;
+    gap: 8px;
+    padding: 18px;
+    border: 1px solid #d8d1c4;
+    border-radius: 8px;
+    background: #fff;
+    text-decoration: none;
+  }
+
+  .card span {
+    color: #555;
+  }
+</style>

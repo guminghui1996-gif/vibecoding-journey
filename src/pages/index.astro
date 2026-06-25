@@ -1,39 +1,80 @@
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>代码小白的 AI 产品构建记录</title>
-  </head>
-  <body>
-    <main>
-      <section>
-        <p>从 VoiceMore 开始</p>
-        <h1>代码小白的 AI 产品构建记录</h1>
-        <p>
-          Vibecoding 本身并没有意义，真正有价值的是，在做项目的过程中，
-          那些判断过程和思考。
-        </p>
-      </section>
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
 
-      <section>
-        <h2>学习时间线</h2>
-        <p>记录每天做了什么、遇到什么问题、如何判断和修正。</p>
-      </section>
+<BaseLayout>
+  <section class="hero">
+    <p>从 VoiceMore 开始</p>
+    <h1>代码小白的 AI 产品构建记录</h1>
+    <p>
+      Vibecoding 本身并没有意义，真正有价值的是，在做项目的过程中，
+      那些判断过程和思考。
+    </p>
+  </section>
 
-      <section>
-        <h2>主题索引</h2>
-        <p>Git、产品判断、数据流、Prompt、Context、API、Harness、发布上线。</p>
-      </section>
+  <section class="grid">
+    <a class="card" href="/days/">
+      <strong>学习时间线</strong>
+      <span>记录每天做了什么、遇到什么问题、如何判断和修正。</span>
+    </a>
 
-      <section>
-        <h2>踩坑与修正</h2>
-        <p>不只展示正确答案，也记录真实误解和修正过程。</p>
-      </section>
+    <a class="card" href="/topics/">
+      <strong>主题索引</strong>
+      <span>Git、产品判断、数据流、Prompt、Context、API、Harness、发布上线。</span>
+    </a>
 
-      <section>
-        <h2>VoiceMore 当前进度</h2>
-        <p>正在用 VoiceMore 学习如何把一个模糊想法拆成需求、代码、验证和发布。</p>
-      </section>
-    </main>
-  </body>
-</html>
+    <a class="card" href="/pitfalls/">
+      <strong>踩坑与修正</strong>
+      <span>不只展示正确答案，也记录真实误解和修正过程。</span>
+    </a>
+  </section>
+
+  <section>
+    <h2>VoiceMore 当前进度</h2>
+    <p>正在用 VoiceMore 学习如何把一个模糊想法拆成需求、代码、验证和发布。</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    max-width: 760px;
+    margin-bottom: 42px;
+  }
+
+  .hero > p:first-child {
+    color: #37635c;
+    font-weight: 700;
+  }
+
+  .hero p {
+    font-size: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    display: grid;
+    gap: 10px;
+    min-height: 132px;
+    padding: 18px;
+    border: 1px solid #d8d1c4;
+    border-radius: 8px;
+    background: #fff;
+    text-decoration: none;
+  }
+
+  .card span {
+    color: #555;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 760px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

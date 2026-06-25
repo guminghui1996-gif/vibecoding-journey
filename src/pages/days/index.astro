@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const modules = import.meta.glob("../../content/days/*.md", { eager: true });
+const days = Object.entries(modules)
+  .map(([path, module]) => {
+    const entry = module as { frontmatter: { title: string; summary: string } };
+    const slug = path.split("/").pop()?.replace(".md", "") ?? "";
+    return { slug, ...entry.frontmatter };
+  })
+  .sort((a, b) => a.slug.localeCompare(b.slug));
+---
+
+<BaseLayout title="学习时间线">
+  <h1>学习时间线</h1>
+  <p>这里按天记录从 0 到 1 做项目时的真实判断、动作和复盘。</p>
+
+  <div class="list">
+    {days.map((day) => (
+      <a class="card" href={`/days/${day.slug}/`}>
+        <strong>{day.title}</strong>
+        <span>{day.summary}</span>
+      </a>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .list {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .card {
+    display: grid;
+    gap: 8px;
+    padding: 18px;
+    border: 1px solid #d8d1c4;
+    border-radius: 8px;
+    background: #fff;
+    text-decoration: none;
+  }
+
+  .card span {
+    color: #555;
+  }
+</style>
